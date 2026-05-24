@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lucas Terry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #F0EDE8;
+      --text-primary: #1B2A4A;
+      --text-secondary: #5A6A85;
+      --accent: #1B2A4A;
+      --hero-bg: var(--bg);
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-primary);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 16px;
+      line-height: 1.8;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><text y='28' font-size='28'>❤️‍🔥</text></svg>") 16 16, auto;
+    }
+
+    body.dark {
+      --bg: #0F1923;
+      --text-primary: #E8EDF5;
+      --text-secondary: #7A8FA8;
+      --hero-bg: #1A2535;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.07;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23grain)'/%3E%3C/svg%3E");
+    }
+
+    /* ── NAV ── */
+    nav:not(.left-nav) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 60px;
+      border-bottom: 0.5px solid rgba(91, 107, 133, 0.2);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 18px;
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-link {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover { color: var(--text-primary); }
+
+    .nav-link-sep {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding-top: 0;
+      padding-bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .hero-image {
+      width: 100%;
+      max-height: 72vh;
+      object-fit: contain;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── HERO CANVAS ── */
+    .hero-canvas {
+      position: relative;
+      width: 100vw;
+      line-height: 0;
+      margin-bottom: 120px;
+      filter: drop-shadow(-24px 24px 48px rgba(0, 0, 0, 0.22));
+      max-width: 68%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── TWO COLUMN ── */
+    .content-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 60px 120px;
+      display: flex;
+      gap: 60px;
+      align-items: flex-start;
+    }
+
+    /* ── LEFT NAV ── */
+    .left-nav {
+      width: 26%;
+      flex-shrink: 0;
+      position: sticky;
+      top: 40px;
+    }
+
+    .tab-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 44px;
+      padding-top: 0;
+      margin-top: 0;
+    }
+
+    .tab-item {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 400;
+      font-size: 15px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding-left: 15px;
+      transition: all 0.15s ease;
+      user-select: none;
+      border: none;
+    }
+
+    .tab-item:hover {
+      color: var(--text-primary);
+    }
+
+    .tab-item.active {
+      color: var(--text-primary);
+      padding-left: 12px;
+      border-left: 3px solid var(--accent);
+    }
+
+    /* ── RIGHT COLUMN ── */
+    .right-col {
+      width: 74%;
+      min-width: 0;
+      margin-top: 0;
+    }
+
+    .panel {
+      opacity: 0;
+      display: none;
+      transition: opacity 0.2s ease;
+      padding-top: 0;
+      margin-top: 0;
+    }
+
+    .panel.visible {
+      display: block;
+      opacity: 1;
+      padding-top: 0;
+      margin-top: 0;
+    }
+
+    .panel.fading-in {
+      display: block;
+      opacity: 0;
+    }
+
+    /* ── ABOUT PANEL ── */
+    .bio {
+      max-width: 520px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 32px;
+      padding-top: 0;
+    }
+
+    .bio p {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--text-primary);
+      margin-bottom: 0;
+    }
+
+    /* ── ABOUT DIVIDER ── */
+    .about-rule {
+      border: none;
+      border-top: 1px solid #C5CDD8;
+      margin: 40px 0;
+      width: 100%;
+    }
+
+    body.dark .about-rule {
+      border-top-color: #2A3A50;
+    }
+
+    /* ── NOW GRID ── */
+    .now-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 0;
+    }
+
+    .now-heading {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .now-item {
+      margin-bottom: 16px;
+      border-left: 2px solid rgba(91,107,133,0.3);
+      padding-left: 10px;
+    }
+
+    .now-item-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      line-height: 1.5;
+    }
+
+    .now-item-desc {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .now-item-quote {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ── PLACEHOLDER PANELS ── */
+    .placeholder-text {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 300;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.9;
+    }
+
+    /* ── PROJECTS / EXPERIENCE LIST ── */
+    .exp-list {
+      max-width: 580px;
+    }
+
+    .exp-entry {
+      padding-bottom: 0;
+    }
+
+    .exp-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .exp-role {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text-primary);
+      letter-spacing: 0.01em;
+    }
+
+    .exp-date {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 300;
+      font-size: 13px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .exp-company {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 300;
+      font-size: 13px;
+      color: var(--text-secondary);
+      display: block;
+      margin-top: 4px;
+    }
+
+    .exp-desc {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 300;
+      font-size: 14px;
+      color: var(--text-primary);
+      line-height: 1.8;
+      margin-top: 10px;
+      max-width: 520px;
+    }
+
+    .exp-rule {
+      border: none;
+      border-top: 0.5px solid #C5CDD8;
+      margin: 28px 0;
+      width: 100%;
+    }
+
+    body.dark .exp-rule {
+      border-top-color: #2A3A50;
+    }
+
+    #panel-projects .exp-entry:last-child .exp-rule {
+      display: none;
+    }
+
+    /* ── AI TOOLS SECTION ── */
+    .ai-header { margin-bottom: 32px; }
+    .ai-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 400; color: var(--text-primary); margin-bottom: 10px; line-height: 1.3; }
+    .ai-subtitle { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 13px; color: var(--text-secondary); line-height: 1.8; max-width: 520px; }
+
+    .ai-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+    .ai-filter { font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 400; color: var(--text-secondary); background: transparent; border: 1px solid var(--text-secondary); border-radius: 99px; padding: 5px 14px; cursor: pointer; transition: all 0.15s ease; letter-spacing: 0.01em; }
+    .ai-filter:hover { color: var(--text-primary); border-color: var(--text-primary); }
+    .ai-filter.active { background: var(--text-primary); color: var(--bg); border-color: var(--text-primary); }
+
+    .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+
+    .ai-card { border: 0.5px solid rgba(91,107,133,0.3); border-radius: 10px; padding: 20px; cursor: pointer; transition: border-color 0.2s ease; position: relative; }
+    .ai-card:hover { border-color: var(--text-secondary); }
+    .ai-card.open { border-color: var(--text-primary); border-width: 1px; }
+
+    .ai-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+    .ai-card-category { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); }
+    .ai-card-toggle { background: none; border: none; font-family: 'IBM Plex Mono', monospace; font-size: 18px; color: var(--text-secondary); cursor: pointer; padding: 0; line-height: 1; transition: transform 0.2s ease, color 0.2s ease; }
+    .ai-card.open .ai-card-toggle { transform: rotate(45deg); color: var(--text-primary); }
+
+    .ai-card-title { font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; line-height: 1.4; }
+    .ai-card-desc { font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 300; color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px; }
+
+    .ai-card-footer { display: flex; justify-content: space-between; align-items: center; }
+    .ai-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .ai-tag { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 300; color: var(--text-secondary); border: 0.5px solid var(--text-secondary); border-radius: 99px; padding: 2px 10px; }
+
+    .ai-card-expanded { display: none; margin-top: 20px; padding-top: 20px; border-top: 0.5px solid rgba(91,107,133,0.2); }
+    .ai-card.open .ai-card-expanded { display: block; }
+    .ai-how-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; color: #8B3A3A; text-transform: uppercase; margin-bottom: 10px; }
+    .ai-how-text { font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 300; color: var(--text-primary); line-height: 1.8; }
+
+    .ai-card.hidden { display: none; }
+
+    .ai-count { font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 300; color: var(--text-secondary); font-style: italic; }
+
+    /* ── WRITINGS SECTION ── */
+    .writing-header { margin-bottom: 36px; }
+    .writing-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 400; color: var(--text-primary); margin-bottom: 10px; line-height: 1.3; }
+    .writing-subtitle { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 13px; color: var(--text-secondary); line-height: 1.8; max-width: 520px; }
+
+    .writing-list { max-width: 560px; }
+
+    .writing-entry { padding: 24px 0; }
+
+    .writing-meta { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px; }
+
+    .writing-link { font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600; color: var(--text-primary); text-decoration: none; display: block; margin-bottom: 10px; transition: color 0.2s ease; }
+    .writing-link:hover { color: var(--text-secondary); }
+
+    .writing-desc { font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.8; margin-bottom: 14px; }
+
+    .writing-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .writing-tag { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 300; color: var(--text-secondary); border: 0.5px solid var(--text-secondary); border-radius: 99px; padding: 2px 10px; }
+
+    .writing-rule { border: none; border-top: 0.5px solid rgba(91,107,133,0.25); width: 100%; }
+
+    .writing-count { font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 300; color: var(--text-secondary); font-style: italic; padding-top: 8px; }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 60px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .footer-note {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-secondary);
+      letter-spacing: 0.01em;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .footer-link {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--text-primary);
+    }
+
+    .footer-sep {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin: 0 8px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav {
+        padding: 0 20px;
+      }
+
+      .hero {
+        padding-bottom: 20px;
+        background-color: var(--bg);
+      }
+
+      .hero-image {
+        max-height: 45vh;
+      }
+
+
+      .content-section {
+        flex-direction: column;
+        padding: 0 20px 80px;
+        gap: 40px;
+      }
+
+      .left-nav {
+        width: 100%;
+        position: static;
+      }
+
+      .tab-list {
+        flex-direction: row;
+        gap: 0;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 4px;
+      }
+
+      .tab-list::-webkit-scrollbar {
+        display: none;
+      }
+
+      .tab-item {
+        font-size: 14px;
+        white-space: nowrap;
+        padding: 8px 16px;
+        border-left: none !important;
+        border-bottom: 2px solid transparent;
+        flex-shrink: 0;
+      }
+
+      .tab-item.active {
+        border-bottom: 2px solid var(--accent);
+        padding-left: 16px;
+      }
+
+      .right-col {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Lucas Terry</a>
+    <div class="nav-right">
+      <a href="https://www.linkedin.com/in/lucasterry/" target="_blank" rel="noopener noreferrer" class="nav-link">LinkedIn</a>
+      <span class="nav-link-sep">·</span>
+      <a href="https://x.com/lucas_eth" target="_blank" rel="noopener noreferrer" class="nav-link">X</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-canvas">
+      <img src="hero.png" alt="Lucas Terry illustration" class="hero-image" />
+    </div>
+  </section>
+
+  <!-- TWO COLUMN -->
+  <section class="content-section">
+
+    <!-- LEFT NAV -->
+    <nav class="left-nav" aria-label="Content navigation">
+      <ul class="tab-list" role="tablist">
+        <li class="tab-item active" role="tab" aria-selected="true" data-panel="about">About Me //</li>
+        <li class="tab-item" role="tab" aria-selected="false" data-panel="projects">My Experience //</li>
+        <li class="tab-item" role="tab" aria-selected="false" data-panel="ai">AI Tools I've Built //</li>
+        <li class="tab-item" role="tab" aria-selected="false" data-panel="writings">Things I've Written //</li>
+      </ul>
+    </nav>
+
+    <!-- RIGHT COLUMN -->
+    <div class="right-col">
+
+      <!-- ABOUT ME -->
+      <div class="panel visible" id="panel-about" role="tabpanel">
+        <div class="now-grid">
+
+          <div class="now-col">
+            <div class="now-heading">Working On</div>
+            <div class="now-item">
+              <div class="now-item-title">Finding the next thing.</div>
+              <div class="now-item-desc">Actively looking for my next growth or GTM role at a startup worth caring about.</div>
+            </div>
+            <div class="now-item">
+              <div class="now-item-title">Becoming an AI-native operator.</div>
+              <div class="now-item-desc">In the age of AI, the best creatives are also builders.</div>
+            </div>
+          </div>
+
+          <div class="now-col">
+            <div class="now-heading">Looking Forward</div>
+            <div class="now-item">
+              <div class="now-item-title">Finding a new home.</div>
+              <div class="now-item-desc">London chapter has ended. Travel my heart out, be curious about the world.</div>
+            </div>
+            <div class="now-item">
+              <div class="now-item-title">Building something of my own.</div>
+              <div class="now-item-desc">At some point, a product and not a role.</div>
+            </div>
+          </div>
+
+          <div class="now-col">
+            <div class="now-heading">Thinking About</div>
+            <div class="now-item">
+              <div class="now-item-quote">"We are in the age of the ideas guy."</div>
+            </div>
+            <div class="now-item">
+              <div class="now-item-quote">"Traditional comms is an anachronism. The story is the product — outsourcing it is as bad as outsourcing code."</div>
+            </div>
+          </div>
+
+        </div>
+        <hr class="about-rule" />
+        <div class="bio">
+          <p>I grew up in Australia and spent the last three years living in the UK.</p>
+          <p>I don't think I'm particularly smart. I compensate by being clever and working incredibly hard.</p>
+          <p>Tech startups keep me close to the 0→1 feeling. Not leaving this scene anytime soon.</p>
+          <p>Outside of that, I'm usually in the water or somewhere up a mountain.</p>
+        </div>
+      </div>
+
+      <!-- MY PROJECTS -->
+      <div class="panel" id="panel-projects" role="tabpanel">
+        <div class="exp-list">
+
+          <div class="exp-entry">
+            <div class="exp-header">
+              <span class="exp-role">Growth Lead</span>
+              <span class="exp-date">Jun 2024 — Present</span>
+            </div>
+            <span class="exp-company">Cascade (Previously Perennial) · Remote</span>
+            <p class="exp-desc">Led GTM, growth, content, and user ops at a crypto derivatives neobrokerage. Drove $28M+ in pre-launch deposits, 50K+ waitlist, 60K+ X followers, and $850M+ in trading volume within the first 3 weeks of launch.</p>
+            <hr class="exp-rule" />
+          </div>
+
+          <div class="exp-entry">
+            <div class="exp-header">
+              <span class="exp-role">Head of Marketing</span>
+              <span class="exp-date">Jul 2023 — Jun 2024</span>
+            </div>
+            <span class="exp-company">Cega (Acquired) · Remote</span>
+            <p class="exp-desc">One-person marketing team owning all functions end-to-end. Led GTM for recurring vault product launches contributing to $280M–$404M in platform trading volume during tenure.</p>
+            <hr class="exp-rule" />
+          </div>
+
+          <div class="exp-entry">
+            <div class="exp-header">
+              <span class="exp-role">Head of Marketing</span>
+              <span class="exp-date">Oct 2020 — Aug 2022</span>
+            </div>
+            <span class="exp-company">Mycelium (Tracer DAO) · Brisbane</span>
+            <p class="exp-desc">Led GTM for two perpetual trading product launches on Arbitrum — Perpetual Pools ($800M+ in trading volume) and a GMX-fork perps venue ($1.7B+ in trading volume, $50M+ TVL).</p>
+            <hr class="exp-rule" />
+          </div>
+
+          <div class="exp-entry">
+            <div class="exp-header">
+              <span class="exp-role">Head of Growth</span>
+              <span class="exp-date">Jan 2019 — Oct 2020</span>
+            </div>
+            <span class="exp-company">iNSPIRETEK · Brisbane</span>
+            <p class="exp-desc">Founding team member of an athlete mental health app. Built a community of 50+ Australian Olympic and professional athletes as brand ambassadors with zero budget, driving 2K+ active users to beta.</p>
+            <hr class="exp-rule" />
+          </div>
+
+          <div class="exp-entry">
+            <div class="exp-header">
+              <span class="exp-role">Bachelor of Business</span>
+              <span class="exp-date">2016 — 2018</span>
+            </div>
+            <span class="exp-company">The University of Queensland · Brisbane</span>
+            <p class="exp-desc">Studied business with a focus on marketing and strategy.</p>
+            <hr class="exp-rule" />
+          </div>
+
+        </div>
+      </div>
+
+      <!-- AI TOOLS -->
+      <div class="panel" id="panel-ai" role="tabpanel">
+
+        <div class="ai-header">
+          <h2 class="ai-title">Tools I've built with AI.</h2>
+          <p class="ai-subtitle">Infrastructure built at Cascade — brand, comms, ops and community, all systematised. Systems that let the team operate without me in the room.</p>
+        </div>
+
+        <div class="ai-filters">
+          <button class="ai-filter active" data-filter="all">All</button>
+          <button class="ai-filter" data-filter="ai-content">AI Content</button>
+          <button class="ai-filter" data-filter="brand">Brand Infrastructure</button>
+          <button class="ai-filter" data-filter="ops">Ops</button>
+          <button class="ai-filter" data-filter="community">Community</button>
+          <button class="ai-filter" data-filter="analytics">Analytics</button>
+        </div>
+
+        <div class="ai-grid">
+
+          <div class="ai-card" data-category="ai-content">
+            <div class="ai-card-top">
+              <span class="ai-card-category">AI Content</span>
+              <button class="ai-card-toggle" aria-label="Expand">+</button>
+            </div>
+            <h3 class="ai-card-title">Claude content project</h3>
+            <p class="ai-card-desc">Brand voice, Cascade comms, and marketing copy — all runnable by the team without Lucas's input.</p>
+            <div class="ai-card-footer">
+              <div class="ai-tags"><span class="ai-tag">Claude</span></div>
+            </div>
+            <div class="ai-card-expanded">
+              <div class="ai-how-label">HOW IT WORKS</div>
+              <p class="ai-how-text">A Claude Project (Anthropic's persistent context workspace) pre-loaded with Cascade's brand voice, tone guidelines, and example marketing copy. Anyone on the team opens the project, describes what they need in plain language, and gets on-brand output — no briefing required.</p>
+            </div>
+          </div>
+
+          <div class="ai-card" data-category="brand">
+            <div class="ai-card-top">
+              <span class="ai-card-category">Brand Infrastructure</span>
+              <button class="ai-card-toggle" aria-label="Expand">+</button>
+            </div>
+            <h3 class="ai-card-title">Brand guidelines + tone of voice</h3>
+            <p class="ai-card-desc">Written standards for visual identity, copy tone, and brand application — so the standard held without Lucas in the room.</p>
+            <div class="ai-card-footer">
+              <div class="ai-tags"><span class="ai-tag">Notion</span><span class="ai-tag">Figma</span></div>
+            </div>
+            <div class="ai-card-expanded">
+              <div class="ai-how-label">HOW IT WORKS</div>
+              <p class="ai-how-text">A three-part Notion doc covering (1) visual identity standards, (2) copy tone and voice guidelines, and (3) a content examples bank. Built as a resource for scanning all outgoing content to ensure branding accuracy — so any team member could QA their own work without a review cycle.</p>
+            </div>
+          </div>
+
+          <div class="ai-card" data-category="ops">
+            <div class="ai-card-top">
+              <span class="ai-card-category">Ops</span>
+              <button class="ai-card-toggle" aria-label="Expand">+</button>
+            </div>
+            <h3 class="ai-card-title">VIP relationship database</h3>
+            <p class="ai-card-desc">Depositor history treated as relationship capital — context, preferences, and conversation history in one place.</p>
+            <div class="ai-card-footer">
+              <div class="ai-tags"><span class="ai-tag">Notion</span></div>
+            </div>
+            <div class="ai-card-expanded">
+              <div class="ai-how-label">HOW IT WORKS</div>
+              <p class="ai-how-text">A Notion database with one row per major depositor. Fields: deposit history, preferred comms channel, conversation log, last-touch date, next action. Treated less like a CRM and more like a relationship journal — the goal was to make every interaction feel personal even at scale.</p>
+            </div>
+          </div>
+
+          <div class="ai-card" data-category="ops">
+            <div class="ai-card-top">
+              <span class="ai-card-category">Ops</span>
+              <button class="ai-card-toggle" aria-label="Expand">+</button>
+            </div>
+            <h3 class="ai-card-title">Daily marketing ops</h3>
+            <p class="ai-card-desc">Pulls Granola, Slack, and Calendar into a structured Notion daily page. One command, full day context.</p>
+            <div class="ai-card-footer">
+              <div class="ai-tags"><span class="ai-tag">Claude</span><span class="ai-tag">Notion</span><span class="ai-tag">Granola</span><span class="ai-tag">Slack</span></div>
+            </div>
+            <div class="ai-card-expanded">
+              <div class="ai-how-label">HOW IT WORKS</div>
+              <p class="ai-how-text">A Claude skill (a structured prompt chain) that pulls from three sources: Granola meeting transcripts, Slack thread summaries, and the day's calendar. One command generates a structured Notion daily page with meeting prep, outstanding threads, and a task list. Turns context-gathering from a 20-minute morning ritual into a 30-second command.</p>
+            </div>
+          </div>
+
+          <div class="ai-card" data-category="analytics">
+            <div class="ai-card-top">
+              <span class="ai-card-category">Analytics</span>
+              <button class="ai-card-toggle" aria-label="Expand">+</button>
+            </div>
+            <h3 class="ai-card-title">KOL tracking dashboard</h3>
+            <p class="ai-card-desc">Visualising the referral networks of each KOL in the userbase — referred trading volume and invite code usage in one view.</p>
+            <div class="ai-card-footer">
+              <div class="ai-tags"><span class="ai-tag">Claude</span><span class="ai-tag">Data</span></div>
+            </div>
+            <div class="ai-card-expanded">
+              <div class="ai-how-label">HOW IT WORKS</div>
+              <p class="ai-how-text">Built using direct user stats pulled from the platform. A dashboard that maps each KOL's referral network — showing referred trading volume, invite code usage, and campaign performance over time. Used to monitor influencer campaigns and allocate budget more effectively. Vibe-coded with Claude against our internal data exports.</p>
+            </div>
+          </div>
+
+          <div class="ai-card" data-category="community">
+            <div class="ai-card-top">
+              <span class="ai-card-category">Community</span>
+              <button class="ai-card-toggle" aria-label="Expand">+</button>
+            </div>
+            <h3 class="ai-card-title">Discord gated access system</h3>
+            <p class="ai-card-desc">Community-access system tying Discord permissions and progression to specific platform activity — trading volume, deposits, and PnL.</p>
+            <div class="ai-card-footer">
+              <div class="ai-tags"><span class="ai-tag">Discord</span><span class="ai-tag">Claude</span></div>
+            </div>
+            <div class="ai-card-expanded">
+              <div class="ai-how-label">HOW IT WORKS</div>
+              <p class="ai-how-text">A permission system connecting Discord roles to on-chain and platform data. Users were automatically sorted into tiers based on trading enablement status, volume stats for VIP channel access, and PnL-based rankings. Built to make the community feel earned and exclusive without manual management overhead. Designed the logic, drafted the PRD, and worked directly with engineering to ship it.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <p class="ai-count">6 systems · more in progress.</p>
+
+      </div>
+
+      <!-- THINGS I'VE WRITTEN -->
+      <div class="panel" id="panel-writings" role="tabpanel">
+
+        <div class="writing-header">
+          <h2 class="writing-title">Things I've written.</h2>
+          <p class="writing-subtitle">A mix of launch work, thought pieces, and the occasional tweet that landed.</p>
+        </div>
+
+        <div class="writing-list">
+
+          <div class="writing-entry">
+            <div class="writing-meta">X · 2026</div>
+            <a href="https://x.com/lucas_eth/status/2051374305163038788" target="_blank" rel="noopener noreferrer" class="writing-link">The neo-brokerage thesis</a>
+            <p class="writing-desc">My thoughts on the next generation of crypto companies. The "fintech" era is here and the "onchain" days are over. Brokerages will look boring, feel familiar, and quietly run on crypto rails underneath.</p>
+            <div class="writing-tags">
+              <span class="writing-tag">Thought piece</span>
+            </div>
+          </div>
+          <hr class="writing-rule" />
+
+          <div class="writing-entry">
+            <div class="writing-meta">X · 2025</div>
+            <a href="https://x.com/cascade_xyz/status/2000621776016179578?s=20" target="_blank" rel="noopener noreferrer" class="writing-link">Cascade launch tweet <em style="font-weight:300; font-size:13px; color:var(--text-secondary)"> · 860K views</em></a>
+            <div class="writing-tags">
+              <span class="writing-tag">Banger tweet</span>
+            </div>
+          </div>
+          <hr class="writing-rule" />
+
+          <div class="writing-entry">
+            <div class="writing-meta">X · 2025</div>
+            <a href="https://x.com/cascade_xyz/status/1998452642771780025" target="_blank" rel="noopener noreferrer" class="writing-link">Cascade vision article <em style="font-weight:300; font-size:13px; color:var(--text-secondary)"> · 300K views</em></a>
+            <p class="writing-desc">The introductory article of a completely new brand, pre-product. My way of telling a captivating brand story behind a relatively boring vision.</p>
+            <div class="writing-tags">
+              <span class="writing-tag">Launch article</span>
+            </div>
+          </div>
+          <hr class="writing-rule" />
+
+        </div>
+
+        <p class="writing-count">3 pieces · more coming.</p>
+
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer"></footer>
+
+  <script>
+    // ── TAB SWITCHING ──
+    const tabs = document.querySelectorAll('.tab-item');
+    const panels = document.querySelectorAll('.panel');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.panel;
+        const nextPanel = document.getElementById('panel-' + target);
+
+        if (tab.classList.contains('active')) return;
+
+        // Deactivate all tabs
+        tabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+
+        // Activate clicked tab
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+
+        // Hide current visible panel
+        const currentPanel = document.querySelector('.panel.visible');
+        if (currentPanel) {
+          currentPanel.classList.remove('visible');
+          currentPanel.style.display = 'none';
+        }
+
+        // Fade in new panel
+        nextPanel.style.display = 'block';
+        nextPanel.style.opacity = '0';
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            nextPanel.style.transition = 'opacity 0.2s ease';
+            nextPanel.style.opacity = '1';
+            nextPanel.classList.add('visible');
+          });
+        });
+      });
+    });
+    // ── AI CARD TOGGLE ──
+    document.querySelectorAll('.ai-card').forEach(card => {
+      card.querySelector('.ai-card-toggle').addEventListener('click', (e) => {
+        e.stopPropagation();
+        card.classList.toggle('open');
+      });
+      card.addEventListener('click', () => {
+        card.classList.toggle('open');
+      });
+    });
+
+    // ── AI FILTER ──
+    document.querySelectorAll('.ai-filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.ai-filter').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.ai-card').forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+  </script>
+
+
+</body>
+</html>
