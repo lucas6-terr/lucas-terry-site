@@ -7,7 +7,8 @@
       "Bash(git commit -q -m 'Add build spec, content, wireframe, and headshot asset *)",
       "Bash(python3 -c \"import rembg\")",
       "Bash(npm install *)",
-      "Bash(node scripts/cutout.mjs)"
+      "Bash(node scripts/cutout.mjs)",
+      "Bash(git commit -q -m 'Rework hero: Inter Tight masthead, rebalanced scale, glass lens bubbles, gridded tagline *)"
     ]
   }
 }

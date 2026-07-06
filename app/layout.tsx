@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+import { Inter_Tight, Inter } from "next/font/google";
 import "./globals.css";
 
-const grotesk = Space_Grotesk({
+const tight = Inter_Tight({
   subsets: ["latin"],
-  variable: "--font-grotesk",
+  variable: "--font-tight",
 });
 
 const inter = Inter({
@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${grotesk.variable} ${inter.variable}`}>
+      <body className={`${tight.variable} ${inter.variable}`}>
         {children}
       </body>
     </html>
