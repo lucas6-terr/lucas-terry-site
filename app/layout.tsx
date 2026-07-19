@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://lucasterry.com"),
   title: "Lucas Terry",
   description: "A website about Lucas",
-  icons: { icon: "/logo.png" },
+  icons: { icon: "/mark.png" },
   openGraph: {
     title: "Lucas Terry",
     description: "A website about Lucas",

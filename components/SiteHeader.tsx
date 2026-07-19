@@ -14,7 +14,7 @@ export default function SiteHeader() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className="logo-mark"
-          src="/logo.png"
+          src="/mark.png"
           alt=""
           width={28}
           height={28}
