@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProject, projects } from "@/lib/projects";
+import ToolsGrid from "@/components/ToolsGrid";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -39,6 +40,9 @@ export default async function ProjectPage({ params }: Props) {
             <p key={i}>{text}</p>
           ))}
         </div>
+        {project.tools && (
+          <ToolsGrid tools={project.tools} footer={project.toolsFooter} />
+        )}
       </section>
     </main>
   );

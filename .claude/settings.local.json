@@ -12,7 +12,12 @@
       "WebFetch(domain:www.adamdbs.com)",
       "Bash(curl -sL \"https://www.adamdbs.com/style.css\" -o /private/tmp/claude-501/-Users-lucasterry-Desktop-Project--get--Employment-lucasterry-site/983e4782-8942-4578-8b20-eadd062d2cff/scratchpad/adam-style.css)",
       "Bash(curl -sL \"https://www.adamdbs.com/projects/degenscore\" -o adam-project.html)",
-      "Bash(curl -sL \"https://www.adamdbs.com/contact\" -o adam-contact.html)"
+      "Bash(curl -sL \"https://www.adamdbs.com/contact\" -o adam-contact.html)",
+      "WebSearch",
+      "WebFetch(domain:www.getmosh.com.au)",
+      "WebFetch(domain:nextclinic.com.au)",
+      "WebFetch(domain:www.instantscripts.com.au)",
+      "WebFetch(domain:www.thehairypill.com.au)"
     ]
   }
 }

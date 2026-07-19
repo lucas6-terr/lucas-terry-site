@@ -234,6 +234,138 @@ main {
   color: var(--muted);
 }
 
+/* Expandable tools grid (project pages with `tools` data) */
+.tools {
+  margin-top: 40px;
+}
+.tool-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.tool-pill {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.tool-pill:hover {
+  color: var(--ink);
+  border-color: var(--muted);
+}
+.tool-pill.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+.tool-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: start;
+}
+.tool-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+}
+.tool-toggle {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.tool-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+.tool-category,
+.tool-how-label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.tool-plus {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1;
+}
+.tool-toggle:hover .tool-plus {
+  color: var(--accent);
+}
+.tool-name {
+  display: block;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.tool-blurb {
+  display: block;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--body-ink);
+}
+.tool-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+.tool-body.open {
+  grid-template-rows: 1fr;
+}
+.tool-body-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+.tool-how-label {
+  margin: 14px 0 6px;
+}
+.tool-how {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--body-ink);
+}
+.tool-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+.tool-tag {
+  font-size: 11px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 2px 10px;
+}
+.tools-footer {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 16px;
+}
+@media (max-width: 640px) {
+  .tool-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Footer */
 .site-foot {
   display: flex;
@@ -305,8 +437,12 @@ main {
   }
   .intro-media-frame,
   .intro-image-frame,
+  .intro-graphic-frame,
   .intro h1,
   .intro-copy p {
     animation: none;
+  }
+  .tool-body {
+    transition: none;
   }
 }
