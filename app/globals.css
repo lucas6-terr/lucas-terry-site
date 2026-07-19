@@ -1,36 +1,299 @@
-@import "tailwindcss";
+/* Design system — ported one-for-one from adamdbs.com per Lucas's request.
+   Colours/sizes live here; change a variable and the whole site follows. */
 
-@theme {
-  --color-bg: #fafaf8;
-  --color-ink: #111111;
-  --color-muted: #6f6f68;
-  --color-hairline: #e7e7e1;
-  --color-accent: #2438ff;
+:root {
+  --bg: #ffffff;
+  --ink: #1a1916;
+  --body-ink: #403d36;
+  --muted: #8a857a;
+  --line: #d9d4c7;
+  --accent: #6d5dd3;
+  --mono: var(--font-mono), ui-monospace, "JetBrains Mono", monospace;
+  --sans: var(--font-sans), "Inter", system-ui, -apple-system, sans-serif;
 }
 
-@theme inline {
-  --font-display: var(--font-tight), ui-sans-serif, system-ui, sans-serif;
-  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Faint film grain over everything */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Header */
+.site-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px clamp(24px, 6vw, 80px);
+  padding-left: max(24px, env(safe-area-inset-left));
+  padding-right: max(24px, env(safe-area-inset-right));
+  border-bottom: 1px solid var(--line);
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+.logo-mark {
+  display: block;
+  width: 28px;
+  height: 28px;
+}
+.site-head nav {
+  display: flex;
+  gap: 24px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.site-head nav a {
+  transition: color 0.2s;
+}
+.site-head nav a:hover,
+.site-head nav a.active {
+  color: var(--ink);
+}
+
+/* Main column */
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: clamp(48px, 9vw, 110px) clamp(24px, 6vw, 80px);
+  padding-left: max(24px, env(safe-area-inset-left));
+  padding-right: max(24px, env(safe-area-inset-right));
+}
+
+/* Intro block (homepage, contact, and project pages) */
+.intro {
+  margin-bottom: 96px;
+  max-width: 600px;
+}
+.intro-media-frame {
+  position: relative;
+  width: 35%;
+  max-width: 210px;
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--line);
+  margin-bottom: 24px;
+  overflow: hidden;
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.intro-image-frame {
+  position: relative;
+  width: 50%;
+  max-width: 300px;
+  aspect-ratio: 360 / 168;
+  border: 1px solid var(--line);
+  margin-bottom: 24px;
+  overflow: hidden;
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.intro-media-frame img,
+.intro-image-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.intro h1 {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: clamp(28px, 5vw, 36px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  animation: rise 0.7s 0.05s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.intro-copy p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--body-ink);
+  margin-bottom: 18px;
+  animation: rise 0.7s 0.1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  text-wrap: pretty;
+}
+.intro-copy p:last-child {
+  margin-bottom: 0;
+  animation-delay: 0.15s;
+}
+.intro-copy a {
+  color: inherit;
+  border-bottom: 1px solid var(--accent);
+  overflow-wrap: anywhere;
+}
+.intro-copy a:hover {
+  border-bottom-color: var(--ink);
+}
+.intro .back {
+  margin-bottom: 32px;
+}
+.intro .proj-tag-line {
+  margin: -12px 0 24px;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Selected work */
+.work-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 14px;
+  margin-bottom: 4px;
+}
+.label {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.projects {
+  list-style: none;
+}
+.project a {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 16px 4px;
+  -webkit-tap-highlight-color: transparent;
+}
+.name {
+  display: inline-block;
+  width: fit-content;
+  max-width: 100%;
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  border-bottom: 1px solid var(--accent);
+}
+.project a:hover .name {
+  border-bottom-color: var(--ink);
+}
+.tag {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Footer */
+.site-foot {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 28px clamp(24px, 6vw, 80px);
+  padding-left: max(24px, env(safe-area-inset-left));
+  padding-right: max(24px, env(safe-area-inset-right));
+  padding-bottom: max(28px, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--muted);
+}
+.site-foot a:hover {
+  color: var(--ink);
+}
+.dot {
+  opacity: 0.5;
+}
+
+/* Back link on project pages */
+.back {
+  font-size: 13px;
+  color: var(--muted);
+  display: inline-block;
+  margin-bottom: 32px;
+  transition: color 0.2s;
+}
+.back:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 560px) {
+  .site-head {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  main {
+    padding-top: 36px;
+    padding-bottom: 56px;
+  }
+  .intro {
+    margin-bottom: 64px;
+  }
+  .intro-media-frame {
+    width: min(58%, 240px);
+    max-width: none;
+  }
+  .intro-copy p {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  .intro h1 {
+    margin-bottom: 20px;
+  }
+  .project a {
+    padding: 14px 0;
+  }
+  .tag {
+    font-size: 11px;
+    line-height: 1.4;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-}
-
-body {
-  background: var(--color-bg);
-  color: var(--color-ink);
-  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-
-::selection {
-  background: var(--color-accent);
-  color: #fff;
+  .intro-media-frame,
+  .intro-image-frame,
+  .intro h1,
+  .intro-copy p {
+    animation: none;
+  }
 }
