@@ -9,10 +9,9 @@ export default function Contact() {
   return (
     <main>
       <section className="intro">
-        <div className="intro-image-frame">
-          {/* Placeholder image — swap for a photo Lucas likes */}
+        <div className="intro-graphic-frame">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/contact-placeholder.jpg" alt="" />
+          <img src="/logo.png" alt="" />
         </div>
         <h1>Contact</h1>
         <div className="intro-copy">

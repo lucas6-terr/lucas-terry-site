@@ -131,6 +131,20 @@ main {
   height: 100%;
   object-fit: cover;
 }
+/* Frame for the full logo graphic (contact page) — no crop, natural aspect */
+.intro-graphic-frame {
+  width: 45%;
+  max-width: 240px;
+  border: 1px solid var(--line);
+  padding: 24px;
+  margin-bottom: 24px;
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.intro-graphic-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 .intro h1 {
   font-family: var(--sans);
   font-weight: 600;
