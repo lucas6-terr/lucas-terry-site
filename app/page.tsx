@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { projects } from "@/lib/projects";
 
-// FILLER about paragraphs, seeded from CONTENT.md — Lucas rewrites these.
 export default function Home() {
   return (
     <main>
@@ -13,21 +12,23 @@ export default function Home() {
         <h1>Lucas</h1>
         <div className="intro-copy">
           <p>
-            Hi, nice to meet you. I&rsquo;m a growth and marketing operator —
-            zero-to-one GTM for technical products. I grew up in Australia and
-            spent the last three years living in the UK.
+            I&rsquo;ve spent my professional career at the forefront of
+            evolving tech — and, more importantly, at companies in their very
+            early, foundational moments. Most of it I&rsquo;ve spent navigating
+            crypto, watching it grow and shape itself from an experimental
+            phase into the polished fintech era taking shape today. Eight years
+            in, what I find most interesting is that finance is in the thick of
+            a long journey of change and adoption. It will very obviously run
+            onchain in the future — it&rsquo;s just about the journey, and the
+            dogfight it takes to get there.
           </p>
           <p>
-            I don&rsquo;t think I&rsquo;m particularly smart. I compensate by
-            being clever and working incredibly hard. Tech startups keep me
-            close to the 0→1 feeling, and I&rsquo;m not leaving this scene
-            anytime soon.
+            I&rsquo;m interested in people, technology, and the way people
+            adopt technology. We are in the age of the ideas guy — personal
+            agency has never been higher, and it&rsquo;s an exciting time to be
+            non-technical.
           </p>
-          <p>
-            Outside of that, I&rsquo;m usually in the water or somewhere up a
-            mountain. This website highlights some of the more interesting
-            chapters in my life so far.
-          </p>
+          <p>This site highlights some interesting chapters of my life.</p>
         </div>
       </section>
 
