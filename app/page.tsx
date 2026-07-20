@@ -1,14 +1,12 @@
 import Link from "next/link";
+import Headshot from "@/components/Headshot";
 import { projects } from "@/lib/projects";
 
 export default function Home() {
   return (
     <main>
       <section className="intro">
-        <div className="intro-media-frame">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/headshot.jpg" alt="Lucas Terry" />
-        </div>
+        <Headshot />
         <h1>Lucas</h1>
         <div className="intro-copy">
           <p>

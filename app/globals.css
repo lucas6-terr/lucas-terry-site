@@ -234,6 +234,26 @@ main {
   color: var(--muted);
 }
 
+/* Headshot hover Easter egg (homepage) */
+.headshot-hover video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+.headshot-hover:hover video {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce), (hover: none) {
+  .headshot-hover video {
+    display: none;
+  }
+}
+
 /* Video blocks on project pages (perp.fun) */
 .media-item {
   margin-top: 36px;
