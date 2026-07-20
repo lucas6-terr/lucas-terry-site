@@ -56,9 +56,9 @@ export const projects: Project[] = [
     summary:
       "A spin-off experiment from the Cascade team — perps as an extremely simple product.",
     paragraphs: [
-      "perp.fun was a spin-off from the team at Cascade (previously Perennial) — a passion project, an experiment in the perp space.",
-      "The problem at the time: there were a lot of perp exchanges, and they all looked, felt, and traded exactly the same. perp.fun's purpose was to rip out the 90% of features and functionality we didn't see as necessary and turn perps into an extremely simple product — which they inherently are. Just an interface, running on the same engine.",
-      "That presented a marketing challenge: telling a new story of perps, and selling the idea and the vision behind perp.fun.",
+      "perp.fun was a spin-off project from the team behind Cascade, an experiment in the perps space.",
+      "The problem at the time: there were a lot of perp exchanges, and they all looked, felt, and traded exactly the same. perp.fun's purpose was to rip out the 90% of features and functionality we didn't see as completely necessary and turn perps into an extremely simple product. Which they inherently are, but for the most part aren't packaged in a retail-friendly, gamified way.",
+      "That was my marketing challenge: retelling the story of perps, and who they're actually for.",
     ],
     media: [
       {
