@@ -12,23 +12,21 @@ export default function Home() {
         <h1>Lucas</h1>
         <div className="intro-copy">
           <p>
-            I&rsquo;ve spent my professional career at the forefront of
-            evolving tech — and, more importantly, at companies in their very
-            early, foundational moments. Most of it I&rsquo;ve spent navigating
-            crypto, watching it grow and shape itself from an experimental
-            phase into the polished fintech era taking shape today. Eight years
-            in, what I find most interesting is that finance is in the thick of
-            a long journey of change and adoption. It will very obviously run
-            onchain in the future — it&rsquo;s just about the journey, and the
-            dogfight it takes to get there.
+            Hi, nice to meet you here. I&rsquo;ve spent my career building
+            companies from their earliest, messiest moments. Most of it in
+            crypto, watching an industry grow from a sandbox of experiments to
+            real products. Eight years in, the thing I find most compelling is
+            that finance is undeniably moving onchain, and is in this
+            difficult, long journey of sector-wide adoption. Believing in
+            something when the naysayers get loud is important.
           </p>
           <p>
-            I&rsquo;m interested in people, technology, and the way people
-            adopt technology. We are in the age of the ideas guy — personal
-            agency has never been higher, and it&rsquo;s an exciting time to be
+            I&rsquo;m drawn to people, technology, and the strange way the two
+            find each other. We are in the age of the ideas guy. Personal
+            agency has never been higher, and it&rsquo;s a good time to be
             non-technical.
           </p>
-          <p>This site highlights some interesting chapters of my life.</p>
+          <p>This website is a collection of highlights.</p>
         </div>
       </section>
 
