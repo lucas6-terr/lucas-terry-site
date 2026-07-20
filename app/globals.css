@@ -234,6 +234,24 @@ main {
   color: var(--muted);
 }
 
+/* Video blocks on project pages (perp.fun) */
+.media-item {
+  margin-top: 36px;
+}
+.media-caption {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--body-ink);
+  margin-bottom: 12px;
+  text-wrap: pretty;
+}
+.media-video {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+
 /* Expandable tools grid (project pages with `tools` data) */
 .tools {
   margin-top: 40px;

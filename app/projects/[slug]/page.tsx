@@ -40,6 +40,18 @@ export default async function ProjectPage({ params }: Props) {
             <p key={i}>{text}</p>
           ))}
         </div>
+        {project.media?.map((item) => (
+          <div key={item.src} className="media-item">
+            <p className="media-caption">{item.caption}</p>
+            <video
+              className="media-video"
+              src={item.src}
+              controls
+              playsInline
+              preload="metadata"
+            />
+          </div>
+        ))}
         {project.tools && (
           <ToolsGrid tools={project.tools} footer={project.toolsFooter} />
         )}

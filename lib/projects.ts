@@ -12,6 +12,13 @@ export type Tool = {
   tags: string[];
 };
 
+export type MediaItem = {
+  /** Line of text shown above the video. */
+  caption: string;
+  /** Video file in /public. */
+  src: string;
+};
+
 export type Project = {
   slug: string;
   name: string;
@@ -21,6 +28,8 @@ export type Project = {
   /** One line used for the page's <meta name="description">. */
   summary: string;
   paragraphs: string[];
+  /** Optional videos shown after the write-up (used on the perp-fun page). */
+  media?: MediaItem[];
   /** Optional expandable tools grid (used on the ai-tools page). */
   tools?: Tool[];
   /** Small muted line under the tools grid. */
@@ -38,6 +47,29 @@ export const projects: Project[] = [
       "Cascade (previously Perennial) is a crypto derivatives neobrokerage. I joined in June 2024 to lead GTM, growth, content, and user ops — taking a brand-new product from nothing to a private beta launch.",
       "The launch numbers: $28M+ in pre-launch deposits, a 50K+ waitlist, 60K+ X followers, and $850M+ in trading volume within the first 3 weeks.",
       "This is where I became an AI-native operator — most of the brand, comms, and ops infrastructure I built here runs on systems I made with Claude, so the team can operate without me in the room.",
+    ],
+  },
+  {
+    slug: "perp-fun",
+    name: "perp.fun",
+    tag: "perps · side project",
+    summary:
+      "A spin-off experiment from the Cascade team — perps as an extremely simple product.",
+    paragraphs: [
+      "perp.fun was a spin-off from the team at Cascade (previously Perennial) — a passion project, an experiment in the perp space.",
+      "The problem at the time: there were a lot of perp exchanges, and they all looked, felt, and traded exactly the same. perp.fun's purpose was to rip out the 90% of features and functionality we didn't see as necessary and turn perps into an extremely simple product — which they inherently are. Just an interface, running on the same engine.",
+      "That presented a marketing challenge: telling a new story of perps, and selling the idea and the vision behind perp.fun.",
+    ],
+    media: [
+      {
+        caption: "I made this to tell the story and shape our narrative.",
+        src: "/perpfun-story.mp4",
+      },
+      {
+        caption:
+          "I also made this when Severance was rolling out season 2.",
+        src: "/perpfun-severance.mp4",
+      },
     ],
   },
   {
