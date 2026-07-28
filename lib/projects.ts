@@ -77,10 +77,13 @@ export const projects: Project[] = [
     name: "Cega",
     tag: "defi · head of marketing",
     url: "https://x.com/cega_fi",
-    summary: "One-person marketing team for a DeFi structured-products platform.",
+    summary:
+      "Developing and running the marketing engine at a DeFi structured-products platform.",
     paragraphs: [
-      "Cega is a DeFi structured-products platform (since acquired). From July 2023 to June 2024 I was the one-person marketing team, owning every function end-to-end.",
-      "I led GTM for the recurring vault product launches, which contributed to $280M–$404M in platform trading volume during my time there.",
+      "I joined Cega following their Series A raise to develop and run their marketing engine. Cega gave users a simple fixed monthly yield on their funds, generated through a basket of premiums collected by exotic options trading strategies.",
+      "My role was product-marketing heavy. Structured financial products, launching on a two-month cadence. I established the GTM playbook for these launches — a specific checklist of processes, deadlines, and tasks to execute each product launch consistently.",
+      "In execution I was across all of it: creating the content, briefing designers for the visuals, contacting reporters for press coverage, and working with influencer agencies for targeted exposure.",
+      "We tracked each launch on the numbers — engagement on X, conversions, and actual financial commitments into the product — then identified which part of the funnel was underperforming and made changes from there.",
     ],
   },
   {
