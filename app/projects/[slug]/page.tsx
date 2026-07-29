@@ -35,10 +35,36 @@ export default async function ProjectPage({ params }: Props) {
         <p className="proj-tag-line">
           <span className="tag">{project.tag}</span>
         </p>
+        {project.headerImage && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            className="proj-header-image"
+            src={project.headerImage}
+            alt=""
+          />
+        )}
         <div className="intro-copy">
           {project.paragraphs.map((text, i) => (
             <p key={i}>{text}</p>
           ))}
+          {project.outro?.map((text, i) => (
+            <p key={`outro-${i}`}>{text}</p>
+          ))}
+          {project.articles && (
+            <ul>
+              {project.articles.map((article) => (
+                <li key={article.url}>
+                  <a
+                    href={article.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {article.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
         {project.media?.map((item) => (
           <div key={item.src} className="media-item">

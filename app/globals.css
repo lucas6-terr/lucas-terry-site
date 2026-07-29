@@ -173,6 +173,21 @@ main {
 .intro-copy a:hover {
   border-bottom-color: var(--ink);
 }
+.intro-copy ul {
+  margin: 0 0 18px 20px;
+  color: var(--body-ink);
+}
+.intro-copy li {
+  margin-bottom: 10px;
+  line-height: 1.7;
+}
+.proj-header-image {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--line);
+  margin-bottom: 24px;
+  animation: rise 0.7s 0.05s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
 .intro .back {
   margin-bottom: 32px;
 }
@@ -476,6 +491,7 @@ main {
   .intro-media-frame,
   .intro-image-frame,
   .intro-graphic-frame,
+  .proj-header-image,
   .intro h1,
   .intro-copy p {
     animation: none;

@@ -27,7 +27,13 @@ export type Project = {
   url?: string;
   /** One line used for the page's <meta name="description">. */
   summary: string;
+  /** Banner image shown under the title/tag, before the write-up. */
+  headerImage?: string;
   paragraphs: string[];
+  /** Extra paragraphs after the main write-up (e.g. lead-in to links). */
+  outro?: string[];
+  /** Bulleted external links (e.g. articles) rendered after the outro. */
+  articles?: { title: string; url: string }[];
   /** Optional videos shown after the write-up (used on the perp-fun page). */
   media?: MediaItem[];
   /** Optional expandable tools grid (used on the ai-tools page). */
@@ -79,6 +85,21 @@ export const projects: Project[] = [
     url: "https://x.com/cega_fi",
     summary:
       "Developing and running the marketing engine at a DeFi structured-products platform.",
+    headerImage: "/cega-banner.jpg",
+    outro: [
+      "We took a creative approach to branding, making complex financial products more legible and user-friendly.",
+      "A couple of articles I wrote for Cega:",
+    ],
+    articles: [
+      {
+        title: "Cega V2 Introduces Dual Currency",
+        url: "https://medium.com/cega-fi/cega-v2-introduces-dual-currency-487711934ff5",
+      },
+      {
+        title: "Introducing: Eth Stakers Vault",
+        url: "https://medium.com/cega-fi/introducing-eth-stakers-vault-9107bebc360a",
+      },
+    ],
     paragraphs: [
       "I joined Cega following their Series A raise to develop and run their marketing engine. Cega gave users a simple fixed monthly yield on their funds, generated through a basket of premiums collected by exotic options trading strategies.",
       "My role was product-marketing heavy. Structured financial products, launching on a two-month cadence. I established the GTM playbook for these launches — a specific checklist of processes, deadlines, and tasks to execute each product launch consistently.",
