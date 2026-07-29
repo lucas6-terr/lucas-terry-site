@@ -65,15 +65,12 @@ export const projects: Project[] = [
       "I also built our internal tooling with Claude Code — trader dashboards, referral tracking, and lifecycle systems — so we could see and act on what was happening across the platform.",
       "The result: 9,000+ users onboarded to private beta from a 50,000-strong waitlist built through the pre-launch campaign, and $1B+ in trading volume in the first 4 weeks of launch. 100x the old brand's daily volume.",
     ],
-    mediaAfter: 1,
-    media: [
+    links: [
       {
         caption: "The launch video:",
-        src: "/cascade-launch.mp4",
-        narrow: true,
+        url: "https://x.com/cascade_xyz/status/2000621776016179578",
+        after: 1,
       },
-    ],
-    links: [
       {
         caption: "The launch article I wrote:",
         url: "https://x.com/cascade_xyz/status/1998452642771780025",
