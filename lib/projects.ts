@@ -157,11 +157,13 @@ export const projects: Project[] = [
   {
     slug: "inspiretek",
     name: "iNSPIRETEK",
-    tag: "sportstech · founding member",
-    summary: "Founding team member of an athlete mental health app.",
+    tag: "sports tech · head of growth",
+    summary:
+      "Founding team member at an Australian athlete mental health startup.",
     paragraphs: [
-      "iNSPIRETEK was an athlete mental health app, and my first startup — I joined as a founding team member in January 2019, straight out of university in Brisbane.",
-      "With zero budget, I built a community of 50+ Australian Olympic and professional athletes as brand ambassadors, driving 2K+ active users to the beta.",
+      "I was a founding team member at a B2B SaaS startup out of Australia, a product for athlete mental health and performance, sold to coaches, clubs, and sporting organisations across the country.",
+      "I ran the full funnel across both our B2B and retail audiences. Content, brand, and positioning through to outbound sales.",
+      "I built a network of 50+ Australian Olympic and professional athletes as brand ambassadors on zero budget, driving 2,000+ active users into our beta.",
     ],
   },
   {
