@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProject, projects } from "@/lib/projects";
 import ToolsGrid from "@/components/ToolsGrid";
+import TweetEmbed from "@/components/TweetEmbed";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -25,6 +26,10 @@ export default async function ProjectPage({ params }: Props) {
   const project = getProject(slug);
   if (!project) notFound();
 
+  const tweetsAfter = project.tweetsAfter ?? project.paragraphs.length;
+  const beforeTweets = project.paragraphs.slice(0, tweetsAfter);
+  const afterTweets = project.paragraphs.slice(tweetsAfter);
+
   return (
     <main>
       <section className="intro">
@@ -44,8 +49,17 @@ export default async function ProjectPage({ params }: Props) {
           />
         )}
         <div className="intro-copy">
-          {project.paragraphs.map((text, i) => (
+          {beforeTweets.map((text, i) => (
             <p key={i}>{text}</p>
+          ))}
+          {project.tweets?.map((tweet) => (
+            <div key={tweet.url} className="tweet-block">
+              <p>{tweet.caption}</p>
+              <TweetEmbed url={tweet.url} />
+            </div>
+          ))}
+          {afterTweets.map((text, i) => (
+            <p key={`after-${i}`}>{text}</p>
           ))}
           {project.outro?.map((text, i) => (
             <p key={`outro-${i}`}>{text}</p>

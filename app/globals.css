@@ -269,6 +269,20 @@ main {
   }
 }
 
+/* Embedded X posts (project pages) */
+.tweet-block {
+  margin-bottom: 18px;
+}
+.tweet-block > p {
+  margin-bottom: 6px;
+}
+.tweet-embed {
+  min-height: 120px;
+}
+.tweet-embed .twitter-tweet {
+  margin: 0 !important;
+}
+
 /* Video blocks on project pages (perp.fun) */
 .media-item {
   margin-top: 36px;

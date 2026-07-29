@@ -36,6 +36,10 @@ export type Project = {
   articles?: { title: string; url: string }[];
   /** Optional videos shown after the write-up (used on the perp-fun page). */
   media?: MediaItem[];
+  /** Embedded posts from X, each with a lead-in line. */
+  tweets?: { caption: string; url: string }[];
+  /** Paragraph index the tweet embeds render after (default: after all). */
+  tweetsAfter?: number;
   /** Optional expandable tools grid (used on the ai-tools page). */
   tools?: Tool[];
   /** Small muted line under the tools grid. */
@@ -46,13 +50,28 @@ export const projects: Project[] = [
   {
     slug: "cascade",
     name: "Cascade",
-    tag: "crypto · growth lead",
+    tag: "crypto neo-brokerage · growth lead",
     url: "https://x.com/cascade_xyz",
-    summary: "Zero-to-one GTM for a crypto derivatives neobrokerage.",
+    summary:
+      "Rebrand and relaunch GTM for a crypto neo-brokerage — zero to private beta.",
     paragraphs: [
-      "Cascade (previously Perennial) is a crypto derivatives neobrokerage. I joined in June 2024 to lead GTM, growth, content, and user ops — taking a brand-new product from nothing to a private beta launch.",
-      "The launch numbers: $28M+ in pre-launch deposits, a 50K+ waitlist, 60K+ X followers, and $850M+ in trading volume within the first 3 weeks.",
-      "This is where I became an AI-native operator — most of the brand, comms, and ops infrastructure I built here runs on systems I made with Claude, so the team can operate without me in the room.",
+      "Following a rebrand and relaunch of Perennial under the new name 'Cascade', I led the go-to-market. The positioning and brand were developed from scratch, aimed at a US audience. I contracted a brand partner to shape a very sharp visual identity, and paired it with a compelling story the audience resonated with.",
+      "The GTM took form as a three-month lead-up campaign to private beta. Access ran on invite codes, and inviting others increased your chance of getting in. A growth tactic built on Berghain principles: it was hard to get in, so everyone wanted in. We then leveraged that desire and enabled pre-deposits — users staked funds to lock in a spot as an early trader and earn rewards, with layers of exclusivity added along the way. Pre-deposits ended 280% oversubscribed.",
+      "I led a growth team of three across content, community, and trader relationships. Alongside the retail funnel we ran a direct track for market makers, trading firms, and high-value traders through alternative avenues.",
+      "Beyond the campaign itself, I was across everything commercial. I managed relationships with our market makers and integration partners, ran the agencies across brand and content, and handled comms through a security incident.",
+      "I also built our internal tooling with Claude Code — trader dashboards, referral tracking, and lifecycle systems — so we could see and act on what was happening across the platform.",
+      "The result: 9,000+ users onboarded to private beta from a 50,000-strong waitlist built through the pre-launch campaign, and $1B+ in trading volume in the first 4 weeks of launch. 100x the old brand's daily volume.",
+    ],
+    tweetsAfter: 1,
+    tweets: [
+      {
+        caption: "The launch video:",
+        url: "https://x.com/cascade_xyz/status/2000621776016179578",
+      },
+      {
+        caption: "The launch article I wrote:",
+        url: "https://x.com/cascade_xyz/status/1998452642771780025",
+      },
     ],
   },
   {
