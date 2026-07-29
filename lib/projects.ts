@@ -85,7 +85,7 @@ export const projects: Project[] = [
     url: "https://x.com/cega_fi",
     summary:
       "Developing and running the marketing engine at a DeFi structured-products platform.",
-    headerImage: "/cega-banner.jpg",
+    headerImage: "/cega-banner.webp",
     outro: [
       "We took a creative approach to branding, making complex financial products more legible and user-friendly.",
       "A couple of articles I wrote for Cega:",
