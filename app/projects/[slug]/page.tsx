@@ -4,7 +4,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProject, projects } from "@/lib/projects";
 import ToolsGrid from "@/components/ToolsGrid";
-import TweetEmbed from "@/components/TweetEmbed";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -27,8 +26,21 @@ export default async function ProjectPage({ params }: Props) {
   const project = getProject(slug);
   if (!project) notFound();
 
-  const tweetsAfter = project.tweetsAfter ?? project.paragraphs.length;
   const mediaAfter = project.mediaAfter ?? project.paragraphs.length;
+
+  const linksAt = (idx: number) =>
+    project.links
+      ?.filter((link) => (link.after ?? project.paragraphs.length) === idx)
+      .map((link) => (
+        <div key={link.url} className="link-block">
+          <p>{link.caption}</p>
+          <p>
+            <a href={link.url} target="_blank" rel="noopener noreferrer">
+              {link.url.replace(/^https?:\/\//, "")}
+            </a>
+          </p>
+        </div>
+      ));
 
   const mediaBlocks = project.media?.map((item) => (
     <div
@@ -46,12 +58,6 @@ export default async function ProjectPage({ params }: Props) {
     </div>
   ));
 
-  const tweetBlocks = project.tweets?.map((tweet) => (
-    <div key={tweet.url} className="tweet-block">
-      <p>{tweet.caption}</p>
-      <TweetEmbed url={tweet.url} />
-    </div>
-  ));
 
   return (
     <main>
@@ -73,12 +79,12 @@ export default async function ProjectPage({ params }: Props) {
         )}
         <div className="intro-copy">
           {mediaAfter === 0 && mediaBlocks}
-          {tweetsAfter === 0 && tweetBlocks}
+          {linksAt(0)}
           {project.paragraphs.map((text, i) => (
             <Fragment key={i}>
               <p>{text}</p>
               {mediaAfter === i + 1 && mediaBlocks}
-              {tweetsAfter === i + 1 && tweetBlocks}
+              {linksAt(i + 1)}
             </Fragment>
           ))}
           {project.outro?.map((text, i) => (

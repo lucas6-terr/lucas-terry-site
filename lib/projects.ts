@@ -40,10 +40,9 @@ export type Project = {
   media?: MediaItem[];
   /** Paragraph index the videos render after (default: after all). */
   mediaAfter?: number;
-  /** Embedded posts from X, each with a lead-in line. */
-  tweets?: { caption: string; url: string }[];
-  /** Paragraph index the tweet embeds render after (default: after all). */
-  tweetsAfter?: number;
+  /** Caption + link pairs; `after` is the paragraph index each renders
+   *  after (default: after the last paragraph). */
+  links?: { caption: string; url: string; after?: number }[];
   /** Optional expandable tools grid (used on the ai-tools page). */
   tools?: Tool[];
   /** Small muted line under the tools grid. */
@@ -74,11 +73,15 @@ export const projects: Project[] = [
         narrow: true,
       },
     ],
-    tweetsAfter: 1,
-    tweets: [
+    links: [
       {
         caption: "The launch article I wrote:",
         url: "https://x.com/cascade_xyz/status/1998452642771780025",
+        after: 1,
+      },
+      {
+        caption: "A more technical piece I wrote for Cascade:",
+        url: "https://cascade.xyz/articles/points",
       },
     ],
   },

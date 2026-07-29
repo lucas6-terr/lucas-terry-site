@@ -269,18 +269,12 @@ main {
   }
 }
 
-/* Embedded X posts (project pages) */
-.tweet-block {
-  margin: 24px 0 28px;
+/* Caption + link blocks (project pages) */
+.link-block {
+  margin-bottom: 18px;
 }
-.tweet-block > p {
-  margin-bottom: 6px;
-}
-.tweet-embed {
-  min-height: 120px;
-}
-.tweet-embed .twitter-tweet {
-  margin: 0 !important;
+.link-block > p:first-child {
+  margin-bottom: 4px;
 }
 
 /* Video blocks on project pages (perp.fun, cascade) */
