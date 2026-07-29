@@ -35,7 +35,7 @@ export default function TweetEmbed({ url }: { url: string }) {
 
   return (
     <div ref={ref} className="tweet-embed">
-      <blockquote className="twitter-tweet" data-dnt="true">
+      <blockquote className="twitter-tweet" data-dnt="true" data-width="450">
         {/* widgets.js replaces this; the link is the no-JS fallback */}
         <a href={url} target="_blank" rel="noopener noreferrer">
           {url}

@@ -17,6 +17,8 @@ export type MediaItem = {
   caption: string;
   /** Video file in /public. */
   src: string;
+  /** Render at 75% of the text column instead of full width. */
+  narrow?: boolean;
 };
 
 export type Project = {
@@ -34,8 +36,10 @@ export type Project = {
   outro?: string[];
   /** Bulleted external links (e.g. articles) rendered after the outro. */
   articles?: { title: string; url: string }[];
-  /** Optional videos shown after the write-up (used on the perp-fun page). */
+  /** Optional videos with captions (perp.fun, cascade). */
   media?: MediaItem[];
+  /** Paragraph index the videos render after (default: after all). */
+  mediaAfter?: number;
   /** Embedded posts from X, each with a lead-in line. */
   tweets?: { caption: string; url: string }[];
   /** Paragraph index the tweet embeds render after (default: after all). */
@@ -62,12 +66,16 @@ export const projects: Project[] = [
       "I also built our internal tooling with Claude Code — trader dashboards, referral tracking, and lifecycle systems — so we could see and act on what was happening across the platform.",
       "The result: 9,000+ users onboarded to private beta from a 50,000-strong waitlist built through the pre-launch campaign, and $1B+ in trading volume in the first 4 weeks of launch. 100x the old brand's daily volume.",
     ],
-    tweetsAfter: 1,
-    tweets: [
+    mediaAfter: 1,
+    media: [
       {
         caption: "The launch video:",
-        url: "https://x.com/cascade_xyz/status/2000621776016179578",
+        src: "/cascade-launch.mp4",
+        narrow: true,
       },
+    ],
+    tweetsAfter: 1,
+    tweets: [
       {
         caption: "The launch article I wrote:",
         url: "https://x.com/cascade_xyz/status/1998452642771780025",

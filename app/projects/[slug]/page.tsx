@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Fragment } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProject, projects } from "@/lib/projects";
@@ -27,8 +28,30 @@ export default async function ProjectPage({ params }: Props) {
   if (!project) notFound();
 
   const tweetsAfter = project.tweetsAfter ?? project.paragraphs.length;
-  const beforeTweets = project.paragraphs.slice(0, tweetsAfter);
-  const afterTweets = project.paragraphs.slice(tweetsAfter);
+  const mediaAfter = project.mediaAfter ?? project.paragraphs.length;
+
+  const mediaBlocks = project.media?.map((item) => (
+    <div
+      key={item.src}
+      className={`media-item${item.narrow ? " narrow" : ""}`}
+    >
+      <p className="media-caption">{item.caption}</p>
+      <video
+        className="media-video"
+        src={item.src}
+        controls
+        playsInline
+        preload="metadata"
+      />
+    </div>
+  ));
+
+  const tweetBlocks = project.tweets?.map((tweet) => (
+    <div key={tweet.url} className="tweet-block">
+      <p>{tweet.caption}</p>
+      <TweetEmbed url={tweet.url} />
+    </div>
+  ));
 
   return (
     <main>
@@ -49,17 +72,14 @@ export default async function ProjectPage({ params }: Props) {
           />
         )}
         <div className="intro-copy">
-          {beforeTweets.map((text, i) => (
-            <p key={i}>{text}</p>
-          ))}
-          {project.tweets?.map((tweet) => (
-            <div key={tweet.url} className="tweet-block">
-              <p>{tweet.caption}</p>
-              <TweetEmbed url={tweet.url} />
-            </div>
-          ))}
-          {afterTweets.map((text, i) => (
-            <p key={`after-${i}`}>{text}</p>
+          {mediaAfter === 0 && mediaBlocks}
+          {tweetsAfter === 0 && tweetBlocks}
+          {project.paragraphs.map((text, i) => (
+            <Fragment key={i}>
+              <p>{text}</p>
+              {mediaAfter === i + 1 && mediaBlocks}
+              {tweetsAfter === i + 1 && tweetBlocks}
+            </Fragment>
           ))}
           {project.outro?.map((text, i) => (
             <p key={`outro-${i}`}>{text}</p>
@@ -80,18 +100,6 @@ export default async function ProjectPage({ params }: Props) {
             </ul>
           )}
         </div>
-        {project.media?.map((item) => (
-          <div key={item.src} className="media-item">
-            <p className="media-caption">{item.caption}</p>
-            <video
-              className="media-video"
-              src={item.src}
-              controls
-              playsInline
-              preload="metadata"
-            />
-          </div>
-        ))}
         {project.tools && (
           <ToolsGrid tools={project.tools} footer={project.toolsFooter} />
         )}
