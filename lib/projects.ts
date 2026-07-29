@@ -67,7 +67,7 @@ export const projects: Project[] = [
     ],
     links: [
       {
-        caption: "The launch video:",
+        caption: "The launch video I produced with creative partners:",
         url: "https://x.com/cascade_xyz/status/2000621776016179578",
         after: 1,
       },
@@ -137,11 +137,21 @@ export const projects: Project[] = [
   {
     slug: "mycelium",
     name: "Mycelium",
-    tag: "defi · head of marketing",
-    summary: "GTM for two perpetual trading product launches on Arbitrum.",
+    tag: "defi derivatives · head of marketing",
+    summary:
+      "My start in crypto — perps education and partnerships at Tracer DAO.",
     paragraphs: [
-      "Mycelium (originally Tracer DAO) built perpetual trading products on Arbitrum. I led marketing from October 2020 to August 2022, through two major product launches.",
-      "Perpetual Pools did $800M+ in trading volume. The GMX-fork perps venue that followed did $1.7B+ in trading volume with $50M+ TVL.",
+      "Mycelium was my start in crypto. I joined in 2020, right as the industry was finding its feet, and it was a very exciting company experiencing rapid growth.",
+      "I headed marketing for Tracer DAO, the DeFi project building perpetual trading products on Arbitrum. We entered the space at a time when perps were a relatively new concept, so a big part of the job was education — teaching users what these products were for and what you could actually do with them.",
+      "I also managed our major ($100k+) partnerships, including working with the Bankless team on media and narrative building.",
+      "Two product launches later, we'd driven $2.5B+ in combined trading volume.",
+    ],
+    links: [
+      {
+        caption: "Here's a video they made as part of the partnership:",
+        url: "https://www.youtube.com/watch?v=J0nyb7jAsio",
+        after: 3,
+      },
     ],
   },
   {

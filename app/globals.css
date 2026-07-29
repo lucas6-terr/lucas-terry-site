@@ -157,7 +157,7 @@ main {
   font-size: 16px;
   line-height: 1.7;
   color: var(--body-ink);
-  margin-bottom: 18px;
+  margin-bottom: 26px;
   animation: rise 0.7s 0.1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   text-wrap: pretty;
 }
@@ -271,7 +271,7 @@ main {
 
 /* Caption + link blocks (project pages) */
 .link-block {
-  margin-bottom: 18px;
+  margin-bottom: 26px;
 }
 .link-block > p:first-child {
   margin-bottom: 4px;
